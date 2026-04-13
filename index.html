@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>常龍山 斟珠寺 | 臨済宗南禅寺派</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== リセット & 基本 ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:      #1a1a1a;
+      --muted:    #555;
+      --gold:     #9a7d4a;
+      --gold-lt:  #c8a96e;
+      --stone:    #f5f3ef;
+      --white:    #fff;
+      --border:   #d9d3c8;
+      --nav-h:    68px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "ＭＳ 明朝", Georgia, serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.85;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== フェードイン ===== */
+    .fade { opacity: 0; transform: translateY(60px); transition: opacity 1s ease, transform 1s cubic-bezier(.22,.68,0,1.2); }
+    .fade.visible { opacity: 1; transform: none; }
+
+    /* ===== ナビゲーション ===== */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+    }
+    .logo { display: flex; flex-direction: column; line-height: 1.2; }
+    .logo-main { font-size: 1.15rem; letter-spacing: .12em; color: var(--ink); font-family: "Shippori Mincho B1", serif; }
+    .logo-sub  { font-size: .7rem;  letter-spacing: .18em; color: var(--gold); }
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      font-size: .82rem; letter-spacing: .12em; color: var(--muted);
+      position: relative; padding-bottom: 2px;
+      transition: color .2s;
+    }
+    nav a::after {
+      content: ""; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width .3s;
+    }
+    nav a:hover { color: var(--gold); }
+    nav a:hover::after { width: 100%; }
+
+    /* ハンバーガー */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* スマホメニュー */
+    .mobile-nav {
+      display: none; flex-direction: column; gap: 0;
+      position: fixed; top: var(--nav-h); left: 0; width: 100%;
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      padding: 1rem 8%; font-size: .9rem; letter-spacing: .1em;
+      color: var(--ink); border-bottom: 1px solid var(--border);
+      transition: background .2s;
+    }
+    .mobile-nav a:hover { background: var(--stone); }
+
+    /* ===== ヒーロー ===== */
+    #hero {
+      height: 100svh; min-height: 560px;
+      position: relative; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; padding: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(160deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.25) 60%, rgba(10,10,10,.5) 100%),
+        url("top/top.JPG"); /* JSで上書きされます */
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-content {
+      position: relative; color: var(--white);
+      padding: 0 1.5rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1.5rem;
+    }
+    .hero-main {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-label {
+      font-size: 1.05rem; letter-spacing: .35em; color: var(--white);
+      writing-mode: vertical-rl;
+      position: absolute; left: 100%; top: 0;
+      margin-left: .6rem;
+      opacity: 0;
+      animation: fadeUp 1.2s .3s forwards;
+    }
+    .hero-title-wrap {
+      text-align: center;
+      opacity: 0; animation: fadeUp 1.2s .55s forwards;
+    }
+    .hero-kamon {
+      width: 80px; height: 80px;
+      object-fit: contain;
+      filter: invert(1);
+      margin: 0 auto .6rem;
+      display: block;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      letter-spacing: .3em; font-weight: 800;
+      writing-mode: vertical-rl;
+      display: inline-block;
+      font-family: "Shippori Mincho B1", serif;
+    }
+    .hero-title span { display: block; font-size: .42em; letter-spacing: .4em; color: rgba(255,255,255,.7); margin-bottom: .3em; }
+    .hero-divider {
+      width: 48px; height: 1px; background: var(--gold-lt);
+      opacity: 0; animation: fadeUp 1.2s .8s forwards;
+    }
+    .hero-romaji {
+      display: block;
+      font-size: .75rem; letter-spacing: .3em;
+      color: rgba(255,255,255,.6);
+      margin-top: .8rem;
+      text-align: center;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 0; right: 0;
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      color: rgba(255,255,255,.55); font-size: .65rem; letter-spacing: .2em;
+      opacity: 0; animation: fadeUp 1.2s 1.3s forwards;
+    }
+    .hero-scroll::after {
+      content: ""; display: block; width: 1px; height: 36px;
+      background: rgba(255,255,255,.4);
+      animation: scrollLine 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollLine { 0%,100%{opacity:.2;transform:scaleY(1);} 50%{opacity:.8;transform:scaleY(1.3);} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(60px);} to{opacity:1;transform:none;} }
+
+
+    /* ===== セクション共通 ===== */
+    section { padding: 6rem 5%; }
+    section:nth-child(even) { background: var(--stone); }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-label { font-size: .68rem; letter-spacing: .38em; color: var(--gold); display: block; margin-bottom: .6rem; }
+    .section-title { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: .18em; font-weight: 400; }
+    .section-line { width: 36px; height: 1px; background: var(--gold); margin: 1rem auto 0; }
+    .inner { max-width: 860px; margin: 0 auto; }
+
+    /* ===== 歴史 ===== */
+    .history-body {
+      display: grid; gap: 2rem;
+      grid-template-columns: 1fr;
+    }
+    .history-body p { color: var(--muted); text-align: justify; }
+    .history-list { display: grid; gap: 1.2rem; margin-top: 2rem; }
+    .history-item {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 1rem; padding: 1.2rem 1.5rem;
+      background: var(--white); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold); border-radius: 2px;
+    }
+    .history-item dt {
+      font-size: .72rem; letter-spacing: .18em; color: var(--gold);
+      padding-top: .1rem;
+    }
+    .history-item dd { font-size: .9rem; color: var(--muted); line-height: 1.8; }
+    .history-item dd ruby { font-size: .9em; }
+    @media (max-width: 600px) {
+      .history-item { grid-template-columns: 1fr; gap: .3rem; }
+    }
+
+    /* ===== 年間行事 ===== */
+    .events { display: grid; gap: 1rem; }
+    .event-item {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 1rem; align-items: start;
+      padding: 1.2rem 1.5rem;
+      background: var(--white); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 2px;
+    }
+    .event-month { font-size: .75rem; letter-spacing: .2em; color: var(--gold); font-weight: 600; }
+    .event-name { font-size: .95rem; letter-spacing: .05em; }
+    .event-desc { font-size: .78rem; color: var(--muted); margin-top: .15rem; }
+    .event-photo {
+      margin-top: .8rem; border-radius: 2px; overflow: hidden;
+      max-width: 360px;
+    }
+    .event-photo img { width: 100%; max-width: 200px; height: auto; display: block; cursor: pointer; transition: opacity .2s; }
+    .event-photo img:hover { opacity: .8; }
+
+    /* ライトボックス */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.85);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: 2px;
+    }
+    .lightbox-close {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      color: #fff; font-size: 2rem; cursor: pointer;
+      background: none; border: none; line-height: 1;
+      opacity: .7; transition: opacity .2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .event-photo-placeholder {
+      width: 100%; height: 160px; background: var(--stone);
+      border: 1px dashed var(--border); border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: .72rem; letter-spacing: .12em;
+      margin-top: .8rem; max-width: 360px;
+    }
+
+    /* ===== 住職紹介 ===== */
+    .priest-card {
+      display: flex; gap: 3rem; align-items: flex-start;
+    }
+    .priest-photo {
+      flex-shrink: 0; width: 180px; height: 220px;
+      background: linear-gradient(135deg, #3a5a3a, #2d4a2d);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.35); font-size: .72rem; letter-spacing: .15em;
+      text-align: center;
+    }
+    .priest-info h3 { font-size: 1.25rem; letter-spacing: .15em; font-weight: 400; margin-bottom: .3rem; }
+    .priest-info .priest-title { font-size: .75rem; letter-spacing: .2em; color: var(--gold); margin-bottom: 1rem; }
+    .priest-info p { color: var(--muted); font-size: .92rem; }
+
+    /* ===== 樹木葬 ===== */
+    .jumokuso-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .jumokuso-card {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 1.8rem 1.5rem; border-radius: 2px; text-align: center;
+    }
+    .jumokuso-icon { font-size: 2rem; margin-bottom: .8rem; }
+    .jumokuso-card h4 { font-size: .9rem; letter-spacing: .12em; margin-bottom: .6rem; }
+    .jumokuso-card p { font-size: .8rem; color: var(--muted); }
+    .jumokuso-note {
+      margin-top: 2.5rem; padding: 1.5rem;
+      border: 1px solid var(--border); border-left: 3px solid var(--gold);
+      background: var(--white);
+    }
+    .jumokuso-note p { font-size: .85rem; color: var(--muted); }
+
+    /* ===== 常龍塔 ===== */
+    .joryuto-intro {
+      text-align: center; color: var(--muted); font-size: .92rem;
+      margin-bottom: 2.5rem;
+    }
+    .joryuto-price-badge {
+      display: inline-block;
+      border: 1px solid var(--gold); color: var(--gold);
+      font-size: .78rem; letter-spacing: .18em;
+      padding: .3rem .9rem; border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .joryuto-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 640px) {
+      .joryuto-grid { grid-template-columns: 1fr; }
+    }
+    .joryuto-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-top: 3px solid var(--gold); border-radius: 2px;
+      padding: 1.8rem 1.5rem;
+    }
+    .joryuto-card h4 {
+      font-size: .92rem; letter-spacing: .15em;
+      color: var(--ink); margin-bottom: 1.2rem;
+      padding-bottom: .6rem; border-bottom: 1px solid var(--border);
+    }
+    .joryuto-fee-list { display: grid; gap: .8rem; }
+    .joryuto-fee-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: .5rem; font-size: .82rem;
+    }
+    .joryuto-fee-item .fee-label { color: var(--muted); flex: 1; line-height: 1.6; }
+    .joryuto-fee-item .fee-price {
+      color: var(--gold); font-size: .88rem; white-space: nowrap; font-weight: 600;
+    }
+    .joryuto-fee-item .fee-free { color: var(--muted); font-size: .8rem; white-space: nowrap; }
+    .joryuto-note-small {
+      font-size: .75rem; color: var(--muted); margin-top: 1rem;
+      padding-top: .8rem; border-top: 1px solid var(--border);
+      line-height: 1.7;
+    }
+    .joryuto-kaigo {
+      text-align: center; margin-top: 2rem;
+      padding: 1.2rem; border: 1px solid var(--border);
+      border-left: 3px solid var(--gold); background: var(--white);
+      font-size: .9rem; letter-spacing: .12em; color: var(--muted);
+    }
+
+    /* ===== お墓・供養タブ ===== */
+    .tab-nav {
+      display: flex;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 2.5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tab-btn {
+      padding: .85rem 2rem;
+      font-size: .82rem; letter-spacing: .18em;
+      color: var(--muted);
+      border: none; background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color .2s, border-color .2s;
+      font-family: inherit;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .tab-btn:hover  { color: var(--gold); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* 墓地分譲 */
+    .bochi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .bochi-card {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 1.8rem 1.5rem; border-radius: 2px; text-align: center;
+    }
+    .bochi-icon { font-size: 2rem; margin-bottom: .8rem; }
+    .bochi-card h4 { font-size: .9rem; letter-spacing: .12em; margin-bottom: .6rem; }
+    .bochi-card p { font-size: .8rem; color: var(--muted); }
+    .bochi-note {
+      margin-top: 2.5rem; padding: 1.5rem;
+      border: 1px solid var(--border); border-left: 3px solid var(--gold);
+      background: var(--white);
+    }
+    .bochi-note p { font-size: .85rem; color: var(--muted); }
+
+    /* ===== 弁財天湧水池 ===== */
+    .benzaiten-body { display: grid; gap: 1.5rem; margin-bottom: 2rem; }
+    .benzaiten-body p { color: var(--muted); text-align: justify; }
+    .benzaiten-photo-placeholder {
+      width: 100%; height: 220px;
+      background: var(--stone); border: 1px dashed var(--border); border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: .72rem; letter-spacing: .12em;
+    }
+
+    /* ===== アクセス ===== */
+    .access-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: start;
+    }
+    .access-info dt { font-size: .72rem; letter-spacing: .18em; color: var(--gold); margin-top: 1.2rem; }
+    .access-info dt:first-child { margin-top: 0; }
+    .access-info dd { font-size: .9rem; color: var(--muted); margin-top: .2rem; }
+    .map-wrap {
+      width: 100%; aspect-ratio: 4/3;
+      background: #e8e4de;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: .8rem; letter-spacing: .12em;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+    /* ===== フッター ===== */
+    footer {
+      background: #111; color: rgba(255,255,255,.55);
+      padding: 3.5rem 5% 2rem;
+      text-align: center;
+    }
+    .footer-logo { font-size: 1.1rem; letter-spacing: .2em; color: var(--white); margin-bottom: .3rem; }
+    .footer-sub  { font-size: .7rem; letter-spacing: .25em; color: var(--gold-lt); margin-bottom: 1.5rem; }
+    .sns-links { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 2rem; }
+    .sns-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .5rem 1.2rem; border: 1px solid rgba(255,255,255,.2);
+      border-radius: 2px; font-size: .78rem; letter-spacing: .1em;
+      color: rgba(255,255,255,.7); transition: .25s;
+    }
+    .sns-btn:hover { border-color: var(--gold-lt); color: var(--gold-lt); }
+    .sns-btn svg { width: 16px; height: 16px; fill: currentColor; }
+    .footer-copy { font-size: .68rem; letter-spacing: .12em; border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; margin-top: .5rem; }
+
+    /* ===== レスポンシブ ===== */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 4.5rem 6%; }
+      .priest-card { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+      .priest-photo { width: 140px; height: 170px; }
+      .access-grid { grid-template-columns: 1fr; }
+      .map-wrap { order: -1; }
+      .event-item { grid-template-columns: 60px 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { letter-spacing: .12em; }
+      .jumokuso-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ライトボックス -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<!-- ===== ナビゲーション ===== -->
+<header>
+  <div class="logo">
+    <span class="logo-main">常龍山　斟珠寺</span>
+    <span class="logo-sub">JORYUZAN SHINSYUJI</span>
+  </div>
+  <nav>
+    <a href="#history">歴史</a>
+    <a href="#events">年間行事</a>
+    <a href="#priest">住職紹介</a>
+    <a href="#kuyo">お墓・供養</a>
+    <a href="#benzaiten">弁財天</a>
+    <a href="#access">アクセス</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#history"  onclick="closeMenu()">歴史</a>
+  <a href="#events"   onclick="closeMenu()">年間行事</a>
+  <a href="#priest"   onclick="closeMenu()">住職紹介</a>
+  <a href="#kuyo"      onclick="closeMenu()">お墓・供養</a>
+  <a href="#benzaiten" onclick="closeMenu()">弁財天</a>
+  <a href="#access"    onclick="closeMenu()">アクセス</a>
+</div>
+
+<!-- ===== ヒーロー ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-main">
+      <div class="hero-title-wrap">
+        <img src="kamon.png" alt="家紋" class="hero-kamon" />
+        <h1 class="hero-title">
+          斟珠寺
+        </h1>
+        <p class="hero-romaji">SHINSYUJI</p>
+      </div>
+      <p class="hero-label">臨済宗南禅寺派</p>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- ===== 歴史 ===== -->
+<section id="history">
+  <div class="inner">
+    <div class="section-header fade">
+      <span class="section-label">HISTORY</span>
+      <h2 class="section-title">お寺の歴史</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="history-body fade">
+      <p>
+        正式には「臨済宗 南禅寺派 常龍山 斟珠禅寺」と申します。
+        明応元年（1492年）、戦国時代のはじめに創建され、今からおよそ530年余りの歴史を持つ禅寺です。
+        長い年月を経て地域の人々の心の拠り所として歩み続け、現在は21代目の住職が法灯を守り継いでいます。
+      </p>
+      <dl class="history-list">
+        <div class="history-item">
+          <dt>創建</dt>
+          <dd>明応元年（1492年）<br>戦国時代のはじめ</dd>
+        </div>
+        <div class="history-item">
+          <dt>開基</dt>
+          <dd>片倉城の初代城主・大江備中守師親（おおえびっちゅうのかみもろちか）の息子、<br>長井広房（ながいひろふさ）</dd>
+        </div>
+        <div class="history-item">
+          <dt>開山</dt>
+          <dd>春林玄甫（しゅんりんげんぽ）和尚</dd>
+        </div>
+        <div class="history-item">
+          <dt>本堂</dt>
+          <dd>明治14年建立。その他の建物は平成19年に焼失し、平成21年に再建されました。</dd>
+        </div>
+        <div class="history-item">
+          <dt>御本尊・祀られる仏様</dt>
+          <dd>
+            本堂中央：本尊「弥勒菩薩（みろくぼさつ）」<br>
+            本堂左側：「地蔵菩薩（じぞうぼさつ）」<br>
+            西側の池：鎮守の神様「弁財天（べんざいてん）」
+          </dd>
+        </div>
+        <div class="history-item">
+          <dt>徳川家との縁</dt>
+          <dd>江戸時代、三代将軍・徳川家光公より五石の御朱印を拝領。その写しが今も残っています。</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 年間行事 ===== -->
+<section id="events">
+  <div class="inner">
+    <div class="section-header fade">
+      <span class="section-label">ANNUAL EVENTS</span>
+      <h2 class="section-title">年間行事</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="events">
+      <div class="event-item fade">
+        <div class="event-month">2月15日</div>
+        <div>
+          <div class="event-name">涅槃会（ねはんえ）</div>
+          <div class="event-desc">お釈迦様がご入滅された日を偲び、その教えに感謝を捧げる法会です。</div>
+        </div>
+      </div>
+      <div class="event-item fade">
+        <div class="event-month">3月</div>
+        <div>
+          <div class="event-name">春彼岸会</div>
+          <div class="event-desc">春分の日を中心とした七日間。先祖への供養と感謝を捧げます。</div>
+        </div>
+      </div>
+      <div class="event-item fade">
+        <div class="event-month">4月8日</div>
+        <div>
+          <div class="event-name">花まつり（仏誕会）</div>
+          <div class="event-desc">お釈迦様の誕生をお祝いする法会。境内の花御堂に甘茶をかけて礼拝します。</div>
+          <div class="event-photo"><img src="hanamaturi.JPG" alt="花まつり" /></div>
+        </div>
+      </div>
+      <div class="event-item fade">
+        <div class="event-month">4月15日</div>
+        <div>
+          <div class="event-name">施餓鬼会（せがきえ）</div>
+          <div class="event-desc">餓鬼道に苦しむ霊を供養し、ご先祖様の冥福を祈る大切な法会。</div>
+          <div class="event-photo"><img src="segaki.JPG" alt="施餓鬼会" /></div>
+        </div>
+      </div>
+      <div class="event-item fade">
+        <div class="event-month">7月</div>
+        <div>
+          <div class="event-name">盂蘭盆会（うらぼんえ）</div>
+          <div class="event-desc">お盆の時期に先祖の霊をお迎えし、供養するための法会を営みます。</div>
+        </div>
+      </div>
+      <div class="event-item fade">
+        <div class="event-month">9月</div>
+        <div>
+          <div class="event-name">秋彼岸会</div>
+          <div class="event-desc">秋分の日を中心とした七日間。先祖の霊を偲び、心静かに手を合わせます。</div>
+        </div>
+      </div>
+      <div class="event-item fade">
+        <div class="event-month">12月</div>
+        <div>
+          <div class="event-name">成道会（じょうどうえ）</div>
+          <div class="event-desc">お釈迦様の悟りを記念する法会。一年の締めくくりとして心静かに執り行います。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 住職紹介 ===== -->
+<section id="priest">
+  <div class="inner">
+    <div class="section-header fade">
+      <span class="section-label">CHIEF PRIEST</span>
+      <h2 class="section-title">住職紹介</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="priest-card fade">
+      <div class="priest-photo" style="background:none; padding:0; overflow:hidden;">
+        <img src="preist.jpg" alt="住職 いまい あおば" style="width:100%; height:100%; object-fit:cover;" />
+      </div>
+      <div class="priest-info">
+        <h3>いまい　あおば</h3>
+        <p class="priest-title">常龍山 斟珠寺 住職</p>
+        <p>
+          臨済宗南禅寺派の修行道場にて長年の修行を経た後、当山に晋山。
+          「坐禅と生活は一つ」という禅の精神を大切にしながら、
+          地域の皆様とともに歩む寺院づくりを目指しています。<br><br>
+          坐禅体験や法話の場を積極的に設け、禅の教えを現代の日常に生かしていただけるよう
+          努めております。どうぞお気軽にお声がけください。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== お墓・供養（タブ） ===== -->
+<section id="kuyo">
+  <div class="inner">
+    <div class="section-header fade">
+      <span class="section-label">GRAVES &amp; MEMORIAL</span>
+      <h2 class="section-title">お墓・供養のご案内</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <!-- タブナビ -->
+    <div class="tab-nav fade" role="tablist">
+      <button class="tab-btn active" role="tab" data-tab="jumokuso">樹木葬</button>
+      <button class="tab-btn"        role="tab" data-tab="joryuto">常龍塔（永代供養墓）</button>
+      <button class="tab-btn"        role="tab" data-tab="bochi">墓地分譲</button>
+    </div>
+
+    <!-- 樹木葬 -->
+    <div class="tab-panel active" id="tab-jumokuso">
+      <p style="text-align:center; color:var(--muted); font-size:.92rem; margin-bottom:2rem;">
+        斟珠寺では、自然の中に還る新しい供養の形として樹木葬をご提供しています。<br>
+        樹木を墓標とし、花や緑に包まれた境内でゆっくりとお眠りいただけます。
+      </p>
+      <div class="jumokuso-grid">
+        <div class="jumokuso-card">
+          <div class="jumokuso-icon">🌿</div>
+          <h4>自然との共生</h4>
+          <p>樹木や草花に囲まれた環境の中で、大地に還る供養。自然のぬくもりを感じていただけます。</p>
+        </div>
+        <div class="jumokuso-card">
+          <div class="jumokuso-icon">🏯</div>
+          <h4>寺院が永代管理</h4>
+          <p>斟珠寺が責任を持って永代にわたり管理いたします。後継者がいない方もご安心ください。</p>
+        </div>
+        <div class="jumokuso-card">
+          <div class="jumokuso-icon">🤝</div>
+          <h4>合葬・個別両対応</h4>
+          <p>ご家族での個別区画から、他の方と合葬する形式まで、ご要望に合わせてご相談いただけます。</p>
+        </div>
+        <div class="jumokuso-card">
+          <div class="jumokuso-icon">📋</div>
+          <h4>宗旨・宗派不問</h4>
+          <p>どの宗旨・宗派の方でもお受けしております。まずはお気軽にお問い合わせください。</p>
+        </div>
+      </div>
+      <div class="jumokuso-note" style="margin-top:2rem;">
+        <p>
+          <strong>樹木葬のお申し込み・ご相談</strong><br>
+          斟珠寺の樹木葬は、<strong>日本墓地紹介センター</strong>に委託しております。
+          詳細・見学のご予約は下記よりお気軽にお問い合わせください。
+        </p>
+        <a href="https://514194.co.jp/tomb/tokyo-j/sinshuji.html" target="_blank" rel="noopener noreferrer"
+          style="display:inline-block; margin-top:1rem; padding:.6rem 1.6rem;
+                 background:var(--gold); color:#fff; font-size:.82rem;
+                 letter-spacing:.12em; border-radius:2px; transition:background .2s;"
+          onmouseover="this.style.background='#7a6038'" onmouseout="this.style.background='var(--gold)'">
+          斟珠寺 樹木葬ページへ →
+        </a>
+      </div>
+    </div>
+
+    <!-- 常龍塔 -->
+    <div class="tab-panel" id="tab-joryuto">
+      <div class="joryuto-intro">
+        <div style="margin-bottom:1.8rem; border-radius:2px; overflow:hidden; max-height:320px;">
+        <img src="joryuto.JPG" alt="常龍塔" style="width:100%; height:320px; object-fit:cover; display:block;" />
+      </div>
+      <span class="joryuto-price-badge">永代供養墓　一霊位 40万円より</span>
+        <p>
+          常龍塔は、斟珠寺境内に建立された永代供養墓です。<br>
+          三十三回忌まで丁寧に供養を続け、ご先祖様の霊を末永くお守りいたします。
+        </p>
+      </div>
+      <div class="joryuto-grid">
+        <div class="joryuto-card">
+          <h4>永代供養志納金　<small style="font-size:.75em;color:var(--muted);">（三十三回忌まで）</small></h4>
+          <div class="joryuto-fee-list">
+            <div class="joryuto-fee-item">
+              <span class="fee-label">毎年施餓鬼に行う塔婆供養</span>
+              <span class="fee-price">20万円</span>
+            </div>
+            <div class="joryuto-fee-item">
+              <span class="fee-label">施主の三十三回忌までの施餓鬼時に行う塔婆供養及び7月の新塔婆供養</span>
+              <span class="fee-price">5万円</span>
+            </div>
+            <div class="joryuto-fee-item">
+              <span class="fee-label">施主納骨後、すでに亡くなられた方で三十三回忌を迎えていない方の施餓鬼時に行う年回忌塔婆供養</span>
+              <span class="fee-price">2万円</span>
+            </div>
+            <div class="joryuto-fee-item">
+              <span class="fee-label">春・秋彼岸、盆、暮、施餓鬼会　年5回の供花料</span>
+              <span class="fee-free">無料</span>
+            </div>
+            <div class="joryuto-fee-item">
+              <span class="fee-label">本塔過去帳への記載（三十三回忌を迎えていない方）</span>
+              <span class="fee-free">無料</span>
+            </div>
+          </div>
+        </div>
+        <div class="joryuto-card">
+          <h4>納骨志納金</h4>
+          <div class="joryuto-fee-list">
+            <div class="joryuto-fee-item">
+              <span class="fee-label">納骨棚　八寸型までの骨壺に遺骨を納めて安置</span>
+              <span class="fee-price">15万円</span>
+            </div>
+            <div class="joryuto-fee-item">
+              <span class="fee-label">埋骨　サラシ袋に遺骨を納めて安置（複数でも）</span>
+              <span class="fee-price">5万円</span>
+            </div>
+            <div class="joryuto-fee-item">
+              <span class="fee-label">入壇志納金　※檀家以外の方は本塔への納骨・埋骨の前に必要</span>
+              <span class="fee-price">5万円</span>
+            </div>
+          </div>
+          <p class="joryuto-note-small">
+            ※ 檀家以外の方は入壇志納金が別途必要となります。<br>
+            ※ 詳細・ご相談はお気軽にお問い合わせください。
+          </p>
+        </div>
+      </div>
+      <div class="joryuto-kaigo">戒名も承ります。</div>
+    </div>
+
+    <!-- 墓地分譲 -->
+    <div class="tab-panel" id="tab-bochi">
+      <p style="text-align:center; color:var(--muted); font-size:.92rem; margin-bottom:2rem;">
+        斟珠寺では現在、境内墓地の区画を分譲しております。<br>
+        緑豊かな静かな環境の中で、末永く大切な方をお守りいただけます。
+      </p>
+      <div class="bochi-grid">
+        <div class="bochi-card">
+          <div class="bochi-icon">🪨</div>
+          <h4>一般墓地区画</h4>
+          <p>お好みの墓石を建立できる一般的な区画です。詳細はお問い合わせください。</p>
+        </div>
+        <div class="bochi-card">
+          <div class="bochi-icon">🌳</div>
+          <h4>静かな環境</h4>
+          <p>緑に囲まれた斟珠寺境内で、四季の移ろいを感じながらお参りいただけます。</p>
+        </div>
+        <div class="bochi-card">
+          <div class="bochi-icon">🏛️</div>
+          <h4>寺院が管理</h4>
+          <p>寺院が責任を持って境内を管理しており、安心してお任せいただけます。</p>
+        </div>
+        <div class="bochi-card">
+          <div class="bochi-icon">📞</div>
+          <h4>まずはご相談</h4>
+          <p>区画の空き状況・価格など、お気軽にお電話またはご来山の上ご相談ください。</p>
+        </div>
+      </div>
+      <div class="bochi-note">
+        <p>
+          <strong>墓地分譲のお問い合わせ</strong><br>
+          現在分譲中の区画については、直接お寺までお問い合わせください。<br>
+          見学も随時受け付けております。
+        </p>
+        <p style="margin-top:.8rem;">
+          <strong>TEL：</strong>042-637-2883
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 弁財天湧水池 ===== -->
+<section id="benzaiten">
+  <div class="inner">
+    <div class="section-header fade">
+      <span class="section-label">BENZAITEN</span>
+      <h2 class="section-title">弁財天湧水池</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="benzaiten-body fade">
+      <p>
+        境内の西側に広がる湧水池は、古くから清らかな水を湛え続けてきました。
+        その池のほとりには、鎮守の神様として「弁財天（べんざいてん）」がお祀りされています。
+        弁財天は水・音楽・智慧・財福をつかさどる神様であり、
+        斟珠寺の地を静かに守り続けてこられました。
+      </p>
+      <p>
+        湧水池には色とりどりの鯉が悠々と泳いでおり、訪れる人の目を和ませてくれます。
+        池のほとりに佇むと、水のせせらぎと木々のざわめきだけが聞こえる
+        穏やかな時間が流れます。参拝の折にはぜひ足をお運びください。
+      </p>
+    </div>
+    <div class="benzaiten-photo-placeholder fade">写真をここに追加できます</div>
+  </div>
+</section>
+
+<!-- ===== アクセス ===== -->
+<section id="access">
+  <div class="inner">
+    <div class="section-header fade">
+      <span class="section-label">ACCESS</span>
+      <h2 class="section-title">アクセス</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="access-grid">
+      <dl class="access-info fade">
+        <dt>寺院名</dt>
+        <dd>常龍山 斟珠寺</dd>
+        <dt>宗派</dt>
+        <dd>臨済宗南禅寺派</dd>
+        <dt>所在地</dt>
+        <dd>〒192-0914<br>東京都八王子市片倉町86</dd>
+        <dt>電話番号 / FAX</dt>
+        <dd>042-637-2883（TEL・FAX共通）</dd>
+        <dt>電車でお越しの方</dt>
+        <dd>京王高尾線「京王片倉駅」より徒歩10分</dd>
+        <dt>バスでお越しの方</dt>
+        <dd>「時田」バス停下車、徒歩2分</dd>
+        <dt>お車でお越しの方</dt>
+        <dd>圏央道「高尾山IC」より約10分</dd>
+      </dl>
+      <div class="map-wrap fade">
+        <iframe
+          src="https://www.google.com/maps?q=東京都八王子市片倉町86+斟珠寺&output=embed"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== フッター ===== -->
+<footer>
+  <p class="footer-logo">常龍山　斟珠寺</p>
+  <p class="footer-sub">JORYUZAN SHINSYUJI ／ 臨済宗南禅寺派</p>
+  <div class="sns-links">
+    <a class="sns-btn" href="https://www.instagram.com/shinsyuji/" target="_blank" rel="noopener noreferrer">
+      <!-- Instagram アイコン -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+      Instagram
+    </a>
+  </div>
+  <p class="footer-copy">&copy; 常龍山 斟珠寺. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // ===== ハンバーガーメニュー =====
+  const hamburger  = document.getElementById('hamburger');
+  const mobileNav  = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  }
+
+  // ===== ライトボックス =====
+  const lightbox      = document.getElementById('lightbox');
+  const lightboxImg   = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.event-photo img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+
+  // ===== ヒーロー画像ランダム表示 =====
+  const heroImages = [
+    "top/top.JPG",
+    "top/IMG_1164.JPG",
+  ];
+  const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)];
+  const heroBg = document.querySelector('.hero-bg');
+  heroBg.style.background = `
+    linear-gradient(160deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.25) 60%, rgba(10,10,10,.5) 100%),
+    url("${randomImage}")
+  `;
+  heroBg.style.backgroundSize = 'cover';
+  heroBg.style.backgroundPosition = 'center';
+
+  // ===== タブ切り替え =====
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      // ボタンの active 切り替え
+      btn.closest('.tab-nav').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // パネルの active 切り替え
+      const section = btn.closest('section');
+      section.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      section.querySelector('#tab-' + target).classList.add('active');
+    });
+  });
+
+  // ===== フェードイン（Intersection Observer） =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+  // ===== ナビゲーション：スクロールで背景を濃く =====
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    header.style.background = window.scrollY > 40
+      ? 'rgba(255,255,255,.98)'
+      : 'rgba(255,255,255,.92)';
+  });
+</script>
+</body>
+</html>
