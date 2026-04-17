@@ -370,6 +370,22 @@
     }
     .bochi-note p { font-size: .85rem; color: var(--muted); }
 
+    /* ===== 樹木葬写真グリッド ===== */
+    .jumokuso-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .jumokuso-photos img {
+      width: 100%; height: 220px;
+      object-fit: cover; border-radius: 2px; cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .jumokuso-photos { grid-template-columns: 1fr; }
+      .jumokuso-photos img { height: auto; object-fit: unset; }
+    }
+
     /* ===== 弁財天湧水池 ===== */
     .benzaiten-body { display: grid; gap: 1.5rem; margin-bottom: 2rem; }
     .benzaiten-body p { color: var(--muted); text-align: justify; }
@@ -647,9 +663,9 @@
         斟珠寺では、自然の中に還る新しい供養の形として樹木葬をご提供しています。<br>
         樹木を墓標とし、花や緑に包まれた境内でゆっくりとお眠りいただけます。
       </p>
-      <div style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:2rem;">
-        <img src="images/kuyo/jumokusou1.JPG" alt="樹木葬1" style="width:100%; height:auto; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
-        <img src="images/kuyo/jumokusou2.JPG" alt="樹木葬2" style="width:100%; height:auto; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
+      <div class="jumokuso-photos">
+        <img src="images/kuyo/jumokusou1.JPG" alt="樹木葬1" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
+        <img src="images/kuyo/jumokusou2.JPG" alt="樹木葬2" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
       </div>
       <div class="jumokuso-grid">
         <div class="jumokuso-card">
