@@ -50,7 +50,7 @@
     .logo-sub  { font-size: .7rem;  letter-spacing: .18em; color: var(--gold); }
     nav { display: flex; gap: 2rem; }
     nav a {
-      font-size: .82rem; letter-spacing: .12em; color: var(--muted);
+      font-size: 1.08rem; letter-spacing: .12em; color: var(--muted);
       position: relative; padding-bottom: 2px;
       transition: color .2s;
     }
@@ -373,11 +373,9 @@
     /* ===== 弁財天湧水池 ===== */
     .benzaiten-body { display: grid; gap: 1.5rem; margin-bottom: 2rem; }
     .benzaiten-body p { color: var(--muted); text-align: justify; }
-    .benzaiten-photo-placeholder {
-      width: 100%; height: 220px;
-      background: var(--stone); border: 1px dashed var(--border); border-radius: 2px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); font-size: .72rem; letter-spacing: .12em;
+    .benzaiten-photo {
+      width: 100%; border-radius: 2px; display: block;
+      object-fit: cover; max-height: 420px;
     }
 
     /* ===== アクセス ===== */
@@ -445,10 +443,10 @@
 
 <!-- ===== ナビゲーション ===== -->
 <header>
-  <div class="logo">
+  <a href="#hero" class="logo">
     <span class="logo-main">常龍山　斟珠寺</span>
     <span class="logo-sub">JORYUZAN SHINSYUJI</span>
-  </div>
+  </a>
   <nav>
     <a href="#history">歴史</a>
     <a href="#events">年間行事</a>
@@ -610,19 +608,13 @@
       <div class="section-line"></div>
     </div>
     <div class="priest-card fade">
-      <div class="priest-photo" style="background:none; padding:0; overflow:hidden;">
-        <img src="preist.JPG" alt="住職 今治 堂浩" style="width:100%; height:100%; object-fit:cover;" />
+      <div class="priest-photo">
+        準備中
       </div>
       <div class="priest-info">
-        <h3>今治　堂浩</h3>
+        <h3>今治堂浩</h3>
         <p class="priest-title">常龍山 斟珠寺 住職</p>
-        <p>
-          臨済宗南禅寺派の修行道場にて長年の修行を経た後、当山に晋山。
-          「坐禅と生活は一つ」という禅の精神を大切にしながら、
-          地域の皆様とともに歩む寺院づくりを目指しています。<br><br>
-          坐禅体験や法話の場を積極的に設け、禅の教えを現代の日常に生かしていただけるよう
-          努めております。どうぞお気軽にお声がけください。
-        </p>
+        <p style="color:var(--muted); font-size:.88rem; letter-spacing:.1em;">準備中</p>
       </div>
     </div>
   </div>
@@ -660,11 +652,6 @@
           <div class="jumokuso-icon">🏯</div>
           <h4>寺院が永代管理</h4>
           <p>斟珠寺が責任を持って永代にわたり管理いたします。後継者がいない方もご安心ください。</p>
-        </div>
-        <div class="jumokuso-card">
-          <div class="jumokuso-icon">🤝</div>
-          <h4>合葬・個別両対応</h4>
-          <p>ご家族での個別区画から、他の方と合葬する形式まで、ご要望に合わせてご相談いただけます。</p>
         </div>
         <div class="jumokuso-card">
           <div class="jumokuso-icon">📋</div>
@@ -815,7 +802,9 @@
         穏やかな時間が流れます。参拝の折にはぜひ足をお運びください。
       </p>
     </div>
-    <div class="benzaiten-photo-placeholder fade">写真をここに追加できます</div>
+    <figure class="fade" style="margin:0;">
+      <img src="benzaiten.jpg" alt="弁財天湧水池" class="benzaiten-photo" style="object-fit:contain; background:var(--stone);">
+    </figure>
   </div>
 </section>
 
@@ -842,7 +831,7 @@
         <dt>バスでお越しの方</dt>
         <dd>「時田」バス停下車、徒歩2分</dd>
         <dt>お車でお越しの方</dt>
-        <dd>圏央道「高尾山IC」より約10分</dd>
+        <dd>圏央道「高尾山IC」より約15分</dd>
       </dl>
       <div class="map-wrap fade">
         <iframe
