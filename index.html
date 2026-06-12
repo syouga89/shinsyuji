@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow" />
-  <meta name="description" content="臨済宗南禅寺派 常龍山 斟珠寺。明応元年（1492年）創建、東京都八王子市片倉町の禅寺です。樹木葬・永代供養墓（常龍塔）・墓地分譲のご案内、年間行事、弁財天湧水池など。" />
+  <meta name="description" content="臨済宗　南禅寺派　常龍山 斟珠寺。樹木葬・永代供養・お墓・法要・葬儀承ります。東京都八王子市片倉町86。" />
   <meta name="keywords" content="斟珠寺, しんしゅじ, 八王子 寺, 臨済宗, 南禅寺派, 樹木葬, 永代供養, 常龍塔, 墓地, 片倉町, 弁財天, 八王子 お墓" />
   <link rel="canonical" href="https://shinsyuji.jp/" />
   <!-- Favicon -->
@@ -12,12 +12,12 @@
   <link rel="apple-touch-icon" href="/images/kamon/kamon.png" />
   <!-- OGP -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="常龍山 斟珠寺 | 臨済宗南禅寺派 八王子" />
-  <meta property="og:description" content="明応元年（1492年）創建、東京都八王子市片倉町の禅寺。樹木葬・永代供養墓・墓地分譲のご案内。" />
+  <meta property="og:title" content="【公式】斟珠寺　八王子の禅寺" />
+  <meta property="og:description" content="臨済宗　南禅寺派　常龍山 斟珠寺。樹木葬・永代供養・お墓・法要・葬儀承ります。東京都八王子市片倉町86。" />
   <meta property="og:url" content="https://shinsyuji.jp/" />
   <meta property="og:image" content="https://shinsyuji.jp/images/kuyo/jumokusou1.JPG" />
   <meta property="og:locale" content="ja_JP" />
-  <title>常龍山 斟珠寺 | 臨済宗南禅寺派</title>
+  <title>【公式】斟珠寺　八王子の禅寺</title>
   <!-- 構造化データ（Google検索 公式サイト認識用） -->
   <script type="application/ld+json">
   {
@@ -144,6 +144,20 @@
     nav a:hover { color: var(--gold); }
     nav a:hover::after { width: 100%; }
 
+    /* 電話番号 */
+    .header-contact {
+      display: flex; flex-direction: column; align-items: flex-end;
+      line-height: 1.3;
+    }
+    .header-contact-label {
+      font-size: .62rem; letter-spacing: .2em; color: var(--gold);
+    }
+    .header-contact-tel {
+      font-size: 1.05rem; letter-spacing: .08em; color: var(--ink);
+      font-weight: 600;
+    }
+    .header-contact-tel:hover { color: var(--gold); }
+
     /* ハンバーガー */
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; padding: 4px; }
     .hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: .3s; }
@@ -253,6 +267,21 @@
     .section-line { width: 36px; height: 1px; background: var(--gold); margin: 1rem auto 0; }
     .inner { max-width: 860px; margin: 0 auto; }
 
+    /* ===== お知らせ ===== */
+    .news-list { display: grid; gap: .8rem; }
+    .news-item {
+      display: grid; grid-template-columns: 110px 1fr;
+      gap: .8rem; padding: .6rem 1.2rem;
+      background: var(--white); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold); border-radius: 2px;
+      align-items: baseline;
+    }
+    .news-date { font-size: .68rem; letter-spacing: .15em; color: var(--gold); }
+    .news-text { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+    @media (max-width: 600px) {
+      .news-item { grid-template-columns: 1fr; gap: .2rem; }
+    }
+
     /* ===== 歴史 ===== */
     .history-body {
       display: grid; gap: 2rem;
@@ -289,6 +318,35 @@
     .event-month { font-size: .9rem; letter-spacing: .2em; color: var(--gold); font-weight: 600; }
     .event-name { font-size: 1.08rem; letter-spacing: .05em; }
     .event-desc { font-size: .92rem; color: var(--muted); margin-top: .15rem; }
+    /* 年間行事 折りたたみ */
+    .events-outer { position: relative; }
+    .events-wrapper {
+      max-height: 460px;
+      overflow: hidden;
+      transition: max-height .65s cubic-bezier(.4,0,.2,1);
+    }
+    .events-wrapper.open { max-height: 3000px; }
+    .events-fade {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 130px;
+      background: linear-gradient(to bottom, transparent, var(--stone));
+      pointer-events: none;
+      transition: opacity .4s;
+    }
+    .events-wrapper.open ~ .events-fade { opacity: 0; pointer-events: none; }
+    .events-toggle-btn {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      margin: 1.2rem auto 0;
+      padding: .6rem 2rem;
+      border: 1px solid var(--border); border-radius: 2px;
+      background: var(--white); color: var(--gold);
+      font-size: .78rem; letter-spacing: .2em;
+      cursor: pointer; font-family: inherit;
+      transition: background .2s;
+    }
+    .events-toggle-btn:hover { background: var(--stone); }
+    .events-toggle-icon { display: inline-block; transition: transform .35s; font-size: .7rem; }
+    .events-toggle-btn.open .events-toggle-icon { transform: rotate(180deg); }
     .event-photo {
       margin-top: .8rem; border-radius: 2px; overflow: hidden;
       max-width: 360px;
@@ -410,26 +468,31 @@
 
     /* ===== お墓・供養タブ ===== */
     .tab-nav {
-      display: flex;
-      border-bottom: 2px solid var(--border);
+      display: flex; gap: .6rem; justify-content: center;
       margin-bottom: 2.5rem;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+      padding-bottom: .2rem;
     }
     .tab-btn {
-      padding: .85rem 2rem;
-      font-size: .82rem; letter-spacing: .18em;
+      padding: .8rem 1.8rem;
+      font-size: 1rem; letter-spacing: .1em;
       color: var(--muted);
-      border: none; background: none;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      border-radius: 3px;
       cursor: pointer;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-      transition: color .2s, border-color .2s;
+      transition: color .2s, background .2s, border-color .2s;
       font-family: inherit;
       white-space: nowrap; flex-shrink: 0;
     }
-    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-    .tab-btn:hover  { color: var(--gold); }
+    .tab-btn.active {
+      color: var(--white);
+      background: var(--gold);
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+    .tab-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
@@ -517,6 +580,7 @@
     /* ===== レスポンシブ ===== */
     @media (max-width: 768px) {
       nav { display: none; }
+      .header-contact { display: none; }
       .hamburger { display: flex; }
       section { padding: 4.5rem 6%; }
       .priest-card { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
@@ -553,6 +617,10 @@
     <a href="#benzaiten">弁財天</a>
     <a href="#access">アクセス</a>
   </nav>
+  <div class="header-contact">
+    <span class="header-contact-label">お気軽にご相談ください</span>
+    <a href="tel:0426372883" class="header-contact-tel">042-637-2883</a>
+  </div>
   <button class="hamburger" id="hamburger" aria-label="メニュー">
     <span></span><span></span><span></span>
   </button>
@@ -583,6 +651,22 @@
     </div>
   </div>
   <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- ===== お知らせ ===== -->
+<section id="news" style="padding: 2.5rem 5%;">
+  <div class="inner">
+    <div style="display:flex; align-items:baseline; gap:1.5rem; margin-bottom:1rem;">
+      <span style="font-size:.68rem; letter-spacing:.38em; color:var(--gold);">NEWS</span>
+      <span style="font-size:.95rem; letter-spacing:.18em;">お知らせ</span>
+    </div>
+    <div class="news-list fade">
+      <div class="news-item">
+        <span class="news-date">2026年5月1日</span>
+        <span class="news-text">ホームページを開設いたしました。</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ===== 歴史 ===== -->
@@ -641,64 +725,73 @@
       <h2 class="section-title">年間行事</h2>
       <div class="section-line"></div>
     </div>
-    <div class="events">
-      <div class="event-item fade">
-        <div class="event-month">2月15日</div>
-        <div>
-          <div class="event-name">涅槃会（ねはんえ）</div>
-          <div class="event-desc">お釈迦様がご入滅された日を偲び、その教えに感謝を捧げる法会です。</div>
-        </div>
-      </div>
-      <div class="event-item fade">
-        <div class="event-month">3月</div>
-        <div>
-          <div class="event-name">春彼岸会</div>
-          <div class="event-desc">春分の日を中心とした七日間。先祖への供養と感謝を捧げます。</div>
-        </div>
-      </div>
-      <div class="event-item fade">
-        <div class="event-month">4月8日</div>
-        <div>
-          <div class="event-name">花まつり（降誕会）</div>
-          <div class="event-desc">お釈迦様の誕生をお祝いする法会。境内の花御堂に甘茶をかけて礼拝します。</div>
-          <div class="event-photo"><img src="images/events/hanamaturi.JPG" alt="花まつり" /></div>
-        </div>
-      </div>
-      <div class="event-item fade">
-        <div class="event-month">4月15日</div>
-        <div>
-          <div class="event-name">施餓鬼会（せがきえ）</div>
-          <div class="event-desc">餓鬼道に苦しむ霊を供養し、ご先祖様の冥福を祈る大切な法会。</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-top:.8rem; max-width:480px;">
-            <img src="images/events/sgeaki1.JPG" alt="施餓鬼会1" style="width:100%; height:150px; object-fit:cover; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
-            <img src="images/events/segaki2.JPG" alt="施餓鬼会2" style="width:100%; height:150px; object-fit:cover; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
-            <img src="images/events/segaki3.JPG" alt="施餓鬼会3" style="width:100%; height:150px; object-fit:cover; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
-            <img src="images/events/segaki4.JPG" alt="施餓鬼会4" style="width:100%; height:150px; object-fit:cover; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
+    <div class="events-outer fade">
+      <div class="events-wrapper" id="eventsWrapper">
+        <div class="events">
+          <div class="event-item">
+            <div class="event-month">2月15日</div>
+            <div>
+              <div class="event-name">涅槃会（ねはんえ）</div>
+              <div class="event-desc">お釈迦様がご入滅された日を偲び、その教えに感謝を捧げる法会です。</div>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-month">3月</div>
+            <div>
+              <div class="event-name">春彼岸会</div>
+              <div class="event-desc">春分の日を中心とした七日間。先祖への供養と感謝を捧げます。</div>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-month">4月8日</div>
+            <div>
+              <div class="event-name">花まつり（降誕会）</div>
+              <div class="event-desc">お釈迦様の誕生をお祝いする法会。境内の花御堂に甘茶をかけて礼拝します。</div>
+              <div class="event-photo"><img src="images/events/hanamaturi.JPG" alt="花まつり" /></div>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-month">4月15日</div>
+            <div>
+              <div class="event-name">施餓鬼会（せがきえ）</div>
+              <div class="event-desc">餓鬼道に苦しむ霊を供養し、ご先祖様の冥福を祈る大切な法会。</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-top:.8rem; max-width:480px;">
+                <img src="images/events/sgeaki1.JPG" alt="施餓鬼会1" style="width:100%; height:150px; object-fit:cover; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
+                <img src="images/events/segaki2.JPG" alt="施餓鬼会2" style="width:100%; height:150px; object-fit:cover; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
+                <img src="images/events/segaki3.JPG" alt="施餓鬼会3" style="width:100%; height:150px; object-fit:cover; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
+                <img src="images/events/segaki4.JPG" alt="施餓鬼会4" style="width:100%; height:150px; object-fit:cover; border-radius:2px; cursor:pointer;" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.add('open');">
+              </div>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-month">7月</div>
+            <div>
+              <div class="event-name">盂蘭盆会（うらぼんえ）</div>
+              <div class="event-desc">お盆の時期に先祖の霊をお迎えし、新盆合同供養や、棚経を営みます。</div>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-month">9月</div>
+            <div>
+              <div class="event-name">秋彼岸会</div>
+              <div class="event-desc">秋分の日を中心とした七日間。先祖の霊を偲び、心静かに手を合わせます。</div>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-month">12月</div>
+            <div>
+              <div class="event-name">成道会（じょうどうえ）</div>
+              <div class="event-desc">お釈迦様の悟りを記念する法会。一年の締めくくりとして心静かに執り行います。</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="event-item fade">
-        <div class="event-month">7月</div>
-        <div>
-          <div class="event-name">盂蘭盆会（うらぼんえ）</div>
-          <div class="event-desc">お盆の時期に先祖の霊をお迎えし、新盆合同供養や、棚経を営みます。</div>
-        </div>
-      </div>
-      <div class="event-item fade">
-        <div class="event-month">9月</div>
-        <div>
-          <div class="event-name">秋彼岸会</div>
-          <div class="event-desc">秋分の日を中心とした七日間。先祖の霊を偲び、心静かに手を合わせます。</div>
-        </div>
-      </div>
-      <div class="event-item fade">
-        <div class="event-month">12月</div>
-        <div>
-          <div class="event-name">成道会（じょうどうえ）</div>
-          <div class="event-desc">お釈迦様の悟りを記念する法会。一年の締めくくりとして心静かに執り行います。</div>
-        </div>
-      </div>
+      <div class="events-fade" id="eventsFade"></div>
     </div>
+    <button class="events-toggle-btn" id="eventsToggle">
+      <span class="events-toggle-label">すべての行事を見る</span>
+      <span class="events-toggle-icon">▼</span>
+    </button>
   </div>
 </section>
 
@@ -737,6 +830,7 @@
       <button class="tab-btn active" role="tab" data-tab="jumokuso">樹木葬</button>
       <button class="tab-btn"        role="tab" data-tab="joryuto">常龍塔（永代供養墓）</button>
       <button class="tab-btn"        role="tab" data-tab="bochi">墓地分譲</button>
+      <button class="tab-btn"        role="tab" data-tab="sougi">年忌法要・葬儀</button>
     </div>
 
     <!-- 樹木葬 -->
@@ -881,6 +975,51 @@
         </p>
         <p style="margin-top:.8rem;">
           <strong>TEL：</strong>042-637-2883
+        </p>
+      </div>
+    </div>
+
+
+    <!-- 年忌法要・葬儀 -->
+    <div class="tab-panel" id="tab-sougi">
+      <p style="text-align:center; color:var(--muted); font-size:.92rem; margin-bottom:2rem;">
+        臨済宗南禅寺派の作法にのっとった葬儀・各種法要を執り行います。<br>
+        心を込めて、丁寧にご対応いたします。
+      </p>
+      <div class="bochi-grid">
+        <div class="bochi-card">
+          <div class="bochi-icon">🪷</div>
+          <h4>年忌法要</h4>
+          <p>一周忌・三回忌・七回忌などの年忌法要を執り行います。</p>
+        </div>
+        <div class="bochi-card">
+          <div class="bochi-icon">🕯️</div>
+          <h4>葬儀・告別式</h4>
+          <p>故人様を心を込めてお見送りする葬儀・告別式をお勤めいたします。</p>
+        </div>
+        <div class="bochi-card">
+          <div class="bochi-icon">📜</div>
+          <h4>戒名授与</h4>
+          <p>ご希望に応じて戒名をお授けいたします。詳細はご相談ください。</p>
+        </div>
+      </div>
+      <div class="bochi-note">
+        <p>
+          <strong>法要・葬儀のご相談</strong><br>
+          突然のご不幸の際も、まずはお電話または公式LINEにてご連絡ください。
+        </p>
+        <p style="margin-top:.8rem;"><strong>TEL：</strong>042-637-2883</p>
+        <p style="margin-top:.5rem;">
+          <a href="https://line.me/R/ti/p/@917cvxyh" target="_blank" rel="noopener noreferrer"
+            style="display:inline-flex; align-items:center; gap:.4rem; margin-top:.3rem;
+                   padding:.45rem 1.2rem; background:#06C755; color:#fff;
+                   font-size:.8rem; letter-spacing:.08em; border-radius:4px; transition:opacity .2s;"
+            onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+            公式LINEはこちら
+          </a>
         </p>
       </div>
     </div>
@@ -1043,6 +1182,18 @@
   }, { threshold: 0.15 });
 
   document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+  // ===== 年間行事 開閉 =====
+  const eventsWrapper = document.getElementById('eventsWrapper');
+  const eventsFade    = document.getElementById('eventsFade');
+  const eventsToggle  = document.getElementById('eventsToggle');
+  const eventsLabel   = eventsToggle.querySelector('.events-toggle-label');
+  eventsToggle.addEventListener('click', () => {
+    const isOpen = eventsWrapper.classList.toggle('open');
+    eventsFade.style.opacity = isOpen ? '0' : '1';
+    eventsToggle.classList.toggle('open', isOpen);
+    eventsLabel.textContent = isOpen ? '閉じる' : 'すべての行事を見る';
+  });
 
   // ===== ナビゲーション：スクロールで背景を濃く =====
   const header = document.querySelector('header');
