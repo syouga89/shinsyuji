@@ -189,11 +189,9 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background:
-        linear-gradient(160deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.25) 60%, rgba(10,10,10,.5) 100%),
-        url("top/top.JPG"); /* JSで上書きされます */
       background-size: cover;
       background-position: center;
+      transition: opacity 1.5s ease;
     }
     .hero-content {
       position: relative; color: var(--white);
@@ -660,7 +658,8 @@
 
 <!-- ===== ヒーロー ===== -->
 <section id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="heroBg1"></div>
+  <div class="hero-bg" id="heroBg2" style="opacity:0;"></div>
   <div class="hero-content">
     <div class="hero-main">
       <div class="hero-title-wrap">
@@ -1166,19 +1165,43 @@
   lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
 
-  // ===== ヒーロー画像ランダム表示 =====
+  // ===== ヒーロー画像スライドショー =====
   const heroImages = [
     "top/IMG_1201.JPG",
     "top/IMG_1164.JPG",
   ];
-  const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)];
-  const heroBg = document.querySelector('.hero-bg');
-  heroBg.style.background = `
-    linear-gradient(160deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.25) 60%, rgba(10,10,10,.5) 100%),
-    url("${randomImage}")
-  `;
-  heroBg.style.backgroundSize = 'cover';
-  heroBg.style.backgroundPosition = 'center';
+  const heroBg1 = document.getElementById('heroBg1');
+  const heroBg2 = document.getElementById('heroBg2');
+  const GRAD = 'linear-gradient(160deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.25) 60%, rgba(10,10,10,.5) 100%)';
+
+  function setBg(el, src) {
+    el.style.background = `${GRAD}, url("${src}")`;
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'center';
+  }
+
+  let current = 0;
+  setBg(heroBg1, heroImages[0]);
+  setBg(heroBg2, heroImages[1]);
+
+  setInterval(() => {
+    const next = (current + 1) % heroImages.length;
+    // 次の画像が入っているレイヤーをフェードイン
+    if (current % 2 === 0) {
+      heroBg2.style.opacity = '1';
+      heroBg1.style.opacity = '0';
+    } else {
+      heroBg1.style.opacity = '1';
+      heroBg2.style.opacity = '0';
+    }
+    current = next;
+    // 次のサイクルのために裏レイヤーを更新
+    const nextNext = (current + 1) % heroImages.length;
+    setTimeout(() => {
+      if (current % 2 === 0) setBg(heroBg2, heroImages[nextNext]);
+      else setBg(heroBg1, heroImages[nextNext]);
+    }, 1600);
+  }, 5000);
 
   // ===== タブ切り替え =====
   document.querySelectorAll('.tab-btn').forEach(btn => {
