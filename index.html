@@ -598,6 +598,32 @@
     .sns-btn svg { width: 16px; height: 16px; fill: currentColor; }
     .footer-copy { font-size: .68rem; letter-spacing: .12em; border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; margin-top: .5rem; }
 
+    /* ===== コンテンツ スライドアップ表示 ===== */
+    #page-content {
+      opacity: 0;
+      transform: translateY(80px);
+      transition: opacity 1s ease, transform 1s cubic-bezier(.22,.68,0,1.2);
+    }
+    #page-content.revealed {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== トップに戻るボタン ===== */
+    #backToTop {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 48px; height: 48px;
+      background: var(--gold); color: #fff;
+      border: none; border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 90;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s, background .2s;
+      font-size: 1.1rem; line-height: 1;
+    }
+    #backToTop.visible { opacity: 1; pointer-events: auto; }
+    #backToTop:hover { background: #7a6038; }
+
     /* ===== レスポンシブ ===== */
     @media (max-width: 768px) {
       nav { display: none; }
@@ -617,6 +643,9 @@
   </style>
 </head>
 <body>
+
+<!-- トップに戻るボタン -->
+<button id="backToTop" aria-label="トップに戻る">▲</button>
 
 <!-- ライトボックス -->
 <div class="lightbox" id="lightbox">
@@ -674,6 +703,8 @@
   </div>
   <div class="hero-scroll">SCROLL</div>
 </section>
+
+<div id="page-content">
 
 <!-- ===== お知らせ ===== -->
 <section id="news" style="padding: 2.5rem 5%;">
@@ -1136,6 +1167,8 @@
   <p class="footer-copy">&copy; 常龍山 斟珠寺. All Rights Reserved.</p>
 </footer>
 
+</div><!-- /#page-content -->
+
 <script>
   // ===== ハンバーガーメニュー =====
   const hamburger  = document.getElementById('hamburger');
@@ -1239,6 +1272,24 @@
     eventsFade.style.opacity = isOpen ? '0' : '1';
     eventsToggle.classList.toggle('open', isOpen);
     eventsLabel.textContent = isOpen ? '閉じる' : 'すべての行事を見る';
+  });
+
+  // ===== コンテンツ スライドアップ表示 =====
+  const pageContent = document.getElementById('page-content');
+  window.addEventListener('scroll', function revealContent() {
+    if (window.scrollY > window.innerHeight * 0.25) {
+      pageContent.classList.add('revealed');
+      window.removeEventListener('scroll', revealContent);
+    }
+  });
+
+  // ===== トップに戻るボタン =====
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 300);
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   // ===== ナビゲーション：スクロールで背景を濃く =====
