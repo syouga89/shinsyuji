@@ -158,6 +158,13 @@
       font-weight: 600;
     }
     .header-contact-tel:hover { color: var(--gold); }
+    .header-contact-row { display: flex; align-items: center; gap: 1.4rem; }
+    .header-contact-line {
+      display: inline-flex; align-items: center; gap: .35rem;
+      color: var(--muted); font-size: .8rem; letter-spacing: .08em;
+    }
+    .header-contact-line svg { width: 16px; height: 16px; fill: currentColor; }
+    .header-contact-line:hover { color: var(--gold); }
 
     /* ハンバーガー */
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; padding: 4px; }
@@ -181,6 +188,17 @@
       transition: background .2s;
     }
     .mobile-nav a:hover { background: var(--stone); }
+    .mobile-nav-contact {
+      padding: 1.1rem 8%; display: flex; flex-direction: column; gap: .6rem;
+    }
+    .mobile-nav-contact-label { font-size: .68rem; letter-spacing: .18em; color: var(--gold); }
+    .mobile-nav-contact-row { display: flex; align-items: center; gap: 1.4rem; }
+    .mobile-nav-contact-tel { font-size: 1.15rem; letter-spacing: .06em; color: var(--ink); font-weight: 600; }
+    .mobile-nav-contact-line {
+      display: inline-flex; align-items: center; gap: .35rem;
+      color: var(--muted); font-size: .85rem; letter-spacing: .08em;
+    }
+    .mobile-nav-contact-line svg { width: 17px; height: 17px; fill: currentColor; }
 
     /* ===== ヒーロー ===== */
     #hero {
@@ -635,6 +653,13 @@
     #backToTop:hover { background: #7a6038; }
 
     /* ===== レスポンシブ ===== */
+    @media (max-width: 1180px) and (min-width: 769px) {
+      nav { gap: 1.1rem; }
+      nav a { font-size: .92rem; }
+      .header-contact-row { gap: .8rem; }
+      .header-contact-tel { font-size: .92rem; }
+      .header-contact-line span { display: none; }
+    }
     @media (max-width: 768px) {
       nav { display: none; }
       .header-contact { display: none; }
@@ -680,7 +705,15 @@
   </nav>
   <div class="header-contact">
     <span class="header-contact-label">お気軽にご相談ください</span>
-    <a href="tel:0426372883" class="header-contact-tel">042-637-2883</a>
+    <div class="header-contact-row">
+      <a href="tel:0426372883" class="header-contact-tel">042-637-2883</a>
+      <a href="https://line.me/R/ti/p/@917cvxyh" target="_blank" rel="noopener noreferrer" class="header-contact-line">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+        </svg>
+        <span>LINE</span>
+      </a>
+    </div>
   </div>
   <button class="hamburger" id="hamburger" aria-label="メニュー">
     <span></span><span></span><span></span>
@@ -694,6 +727,18 @@
   <a href="#kuyo"      onclick="closeMenu()">お墓・供養</a>
   <a href="#benzaiten" onclick="closeMenu()">弁財天</a>
   <a href="#access"    onclick="closeMenu()">アクセス</a>
+  <div class="mobile-nav-contact">
+    <span class="mobile-nav-contact-label">お気軽にご相談ください</span>
+    <div class="mobile-nav-contact-row">
+      <a href="tel:0426372883" class="mobile-nav-contact-tel">042-637-2883</a>
+      <a href="https://line.me/R/ti/p/@917cvxyh" target="_blank" rel="noopener noreferrer" class="mobile-nav-contact-line">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+        </svg>
+        LINE
+      </a>
+    </div>
+  </div>
 </div>
 
 <!-- ===== ヒーロー ===== -->
